@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  	
+	    <title>Oak Tree</title>
+	    <meta name="viewport" content="width=384">
+		<meta charset="utf-8">
+
+	    <style>
+	    	
+	    	body, div, canvas, p{
+	    	    padding: 0px;
+	    	    margin: 0px;
+	    	    -webkit-user-select: none;
+	    	}
+	    	
+	    	body{
+	    	    width:100%;
+	    	    height:100%;
+	    	    overflow:hidden;
+	    	    font-size: 0pt;
+	    	    background-color: black;
+	    	}
+	    	
+	    	#viewport{
+	    	    margin: 0px 0px 0px 0px;
+	    	    background-color: #3B0F43;
+	    	}
+	    	
+	    	#assets{
+	    		display: none;
+	    	}
+	    	
+	    </style>
+	    
+		<script type="text/javascript">
+
+			var game = {};
+			game.scenes = {};
+			var viewport = null;
+			var joypadCanvas = null
+			
+		</script>
+
+		<script type="text/javascript" charset="utf-8"
+		src="js/engine.js"></script>
+		<script type="text/javascript" charset="utf-8"
+		src="js/resources.js"></script>
+		<script type="text/javascript" charset="utf-8"
+		src="js/dpad.js"></script>
+		<script type="text/javascript" charset="utf-8"
+		src="js/boxutils.js"></script>
+		<script type="text/javascript" charset="utf-8"
+		src="js/scenes/plat.js"></script>
+		<script type="text/javascript" charset="utf-8"
+		src="js/scenes/title.js"></script>
+		<script type="text/javascript" charset="utf-8"
+		src="js/scenes/thanks.js"></script>
+		<script type="text/javascript" charset="utf-8"
+		src="js/scenes/topd.js"></script>
+		<script type="text/javascript" charset="utf-8"
+		src="js/gameplay.js"></script>
+		<script type="text/javascript" charset="utf-8"
+		src="js/joypad.js"></script>
+
+		<script type="text/javascript" charset="utf-8"
+		src="level0.js"></script>
+		<script type="text/javascript" charset="utf-8"
+		src="level0t.js"></script>
+		
+		
+		<script type="text/javascript">
+
+	        document.addEventListener("touchmove", function(e) {
+	        	e.preventDefault();
+	        }, false);
+	        
+	    	function onBodyLoad(){
+	    		console.log("game ready");
+				game.engine.bootstrap();
+	    	}
+	    	
+	    	var assetsLoaded = 0;
+	    	
+	    	function assetsReady() {
+	    		console.log("asset ready")
+	    		assetsLoaded++;
+	    		drawLoading(assetsLoaded/74);
+	    	}
+	    	
+	    	function drawLoading(_percent) {
+	    	
+	    		var contextDom = document.getElementById("viewport");
+	    		if(!contextDom) return;
+	    		
+	    		var	canvasCxt  = contextDom.getContext("2d");
+	    		
+	    		canvasCxt.strokeStyle = "#FFF";
+	    		canvasCxt.fillStyle = "#FFF";
+	    		canvasCxt.strokeRect(
+	    			(384-145)/2, (384-20)/2, 145, 20);
+	    		canvasCxt.fillRect(
+	    			(384-145)/2 + 2, (384-20)/2 + 2, 141*_percent, 16);	
+
+	    	}
+		</script>
+    </head>
+    <body onload="onBodyLoad()">
+
+		<center>
+		    <div id="game">
+		    	<canvas id="viewport" width="384" height="384"></canvas>
+		    	<canvas id="joypad" width="384" height="120"></canvas>
+		    </div>
+		</center>
+
+		<div id="assets">
+			<!-- images -->
+			<img onload="assetsReady()" id="popo" src="popo.png"/>
+			<img onload="assetsReady()" id="level" src="level.png"/>
+			<img onload="assetsReady()" id="light" src="light.png"/>
+			<img onload="assetsReady()" id="toplevel" src="toplevel.png"/>
+			<img onload="assetsReady()" id="toplight" src="toplight.png"/>
+			<img onload="assetsReady()" id="title" src="title.png"/>
+			<img onload="assetsReady()" id="thanks" src="thanks.png"/>
+		</div>
+    </body>
+
+	<!-- box2djs -->
+    <script onload="assetsReady()" src="lib/prototype-1.6.0.2.js"></script><script onload="assetsReady()" src='js/box2d/common/b2Settings.js'></script><script onload="assetsReady()" src='js/box2d/common/math/b2Vec2.js'></script><script onload="assetsReady()" src='js/box2d/common/math/b2Mat22.js'></script><script onload="assetsReady()" src='js/box2d/common/math/b2Math.js'></script><script onload="assetsReady()" src='js/box2d/collision/b2AABB.js'></script><script onload="assetsReady()" src='js/box2d/collision/b2Bound.js'></script><script onload="assetsReady()" src='js/box2d/collision/b2BoundValues.js'></script><script onload="assetsReady()" src='js/box2d/collision/b2Pair.js'></script><script onload="assetsReady()" src='js/box2d/collision/b2PairCallback.js'></script><script onload="assetsReady()" src='js/box2d/collision/b2BufferedPair.js'></script><script onload="assetsReady()" src='js/box2d/collision/b2PairManager.js'></script><script onload="assetsReady()" src='js/box2d/collision/b2BroadPhase.js'></script><script onload="assetsReady()" src='js/box2d/collision/b2Collision.js'></script><script onload="assetsReady()" src='js/box2d/collision/Features.js'></script><script onload="assetsReady()" src='js/box2d/collision/b2ContactID.js'></script><script onload="assetsReady()" src='js/box2d/collision/b2ContactPoint.js'></script><script onload="assetsReady()" src='js/box2d/collision/b2Distance.js'></script><script onload="assetsReady()" src='js/box2d/collision/b2Manifold.js'></script><script onload="assetsReady()" src='js/box2d/collision/b2OBB.js'></script><script onload="assetsReady()" src='js/box2d/collision/b2Proxy.js'></script><script onload="assetsReady()" src='js/box2d/collision/ClipVertex.js'></script><script onload="assetsReady()" src='js/box2d/collision/shapes/b2Shape.js'></script><script onload="assetsReady()" src='js/box2d/collision/shapes/b2ShapeDef.js'></script><script onload="assetsReady()" src='js/box2d/collision/shapes/b2BoxDef.js'></script><script onload="assetsReady()" src='js/box2d/collision/shapes/b2CircleDef.js'></script><script onload="assetsReady()" src='js/box2d/collision/shapes/b2CircleShape.js'></script><script onload="assetsReady()" src='js/box2d/collision/shapes/b2MassData.js'></script><script onload="assetsReady()" src='js/box2d/collision/shapes/b2PolyDef.js'></script><script onload="assetsReady()" src='js/box2d/collision/shapes/b2PolyShape.js'></script><script onload="assetsReady()" src='js/box2d/dynamics/b2Body.js'></script><script onload="assetsReady()" src='js/box2d/dynamics/b2BodyDef.js'></script><script onload="assetsReady()" src='js/box2d/dynamics/b2CollisionFilter.js'></script><script onload="assetsReady()" src='js/box2d/dynamics/b2Island.js'></script><script onload="assetsReady()" src='js/box2d/dynamics/b2TimeStep.js'></script><script onload="assetsReady()" src='js/box2d/dynamics/contacts/b2ContactNode.js'></script><script onload="assetsReady()" src='js/box2d/dynamics/contacts/b2Contact.js'></script><script onload="assetsReady()" src='js/box2d/dynamics/contacts/b2ContactConstraint.js'></script><script onload="assetsReady()" src='js/box2d/dynamics/contacts/b2ContactConstraintPoint.js'></script><script onload="assetsReady()" src='js/box2d/dynamics/contacts/b2ContactRegister.js'></script><script onload="assetsReady()" src='js/box2d/dynamics/contacts/b2ContactSolver.js'></script><script onload="assetsReady()" src='js/box2d/dynamics/contacts/b2CircleContact.js'></script><script onload="assetsReady()" src='js/box2d/dynamics/contacts/b2Conservative.js'></script><script onload="assetsReady()" src='js/box2d/dynamics/contacts/b2NullContact.js'></script><script onload="assetsReady()" src='js/box2d/dynamics/contacts/b2PolyAndCircleContact.js'></script><script onload="assetsReady()" src='js/box2d/dynamics/contacts/b2PolyContact.js'></script><script onload="assetsReady()" src='js/box2d/dynamics/b2ContactManager.js'></script><script onload="assetsReady()" src='js/box2d/dynamics/b2World.js'></script><script onload="assetsReady()" src='js/box2d/dynamics/b2WorldListener.js'></script><script onload="assetsReady()" src='js/box2d/dynamics/joints/b2JointNode.js'></script><script onload="assetsReady()" src='js/box2d/dynamics/joints/b2Joint.js'></script><script onload="assetsReady()" src='js/box2d/dynamics/joints/b2JointDef.js'></script><script onload="assetsReady()" src='js/box2d/dynamics/joints/b2DistanceJoint.js'></script><script onload="assetsReady()" src='js/box2d/dynamics/joints/b2DistanceJointDef.js'></script><script onload="assetsReady()" src='js/box2d/dynamics/joints/b2Jacobian.js'></script><script onload="assetsReady()" src='js/box2d/dynamics/joints/b2GearJoint.js'></script><script onload="assetsReady()" src='js/box2d/dynamics/joints/b2GearJointDef.js'></script><script onload="assetsReady()" src='js/box2d/dynamics/joints/b2MouseJoint.js'></script><script onload="assetsReady()" src='js/box2d/dynamics/joints/b2MouseJointDef.js'></script><script onload="assetsReady()" src='js/box2d/dynamics/joints/b2PrismaticJoint.js'></script><script onload="assetsReady()" src='js/box2d/dynamics/joints/b2PrismaticJointDef.js'></script><script onload="assetsReady()" src='js/box2d/dynamics/joints/b2PulleyJoint.js'></script><script onload="assetsReady()" src='js/box2d/dynamics/joints/b2PulleyJointDef.js'></script><script onload="assetsReady()" src='js/box2d/dynamics/joints/b2RevoluteJoint.js'></script><script onload="assetsReady()" src='js/box2d/dynamics/joints/b2RevoluteJointDef.js'></script>
+</html>
